@@ -1,0 +1,32 @@
+<h1>Mi CRUD en Sinatra</h1>
+
+<form action="/items" method="post">
+  <input type="text" name="name" placeholder="Nombre" value="<%= h(@item.name) %>">
+  <input type="text" name="description" placeholder="Descripción (opcional)" value="<%= h(@item.description) %>">
+  <% @item.errors.map(&:message).each do |msg| %>
+    <p class="error"><%= h(msg) %></p>
+  <% end %>
+  <button type="submit">Crear item</button>
+</form>
+
+<h2>Items</h2>
+
+<% if @items.empty? %>
+  <p class="vacio">Aún no hay items. Crea el primero.</p>
+<% end %>
+
+<% @items.each do |item| %>
+  <div class="item">
+    <span>
+      <%= h(item.name) %>
+      <% if item.description.present? %> - <%= h(item.description) %><% end %>
+    </span>
+    <span class="acciones">
+      <a href="/items/<%= item.id %>/edit">Editar</a>
+      <form action="/items/<%= item.id %>" method="post" onsubmit="return confirm('¿Eliminar este item?')">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit">Eliminar</button>
+      </form>
+    </span>
+  </div>
+<% end %>

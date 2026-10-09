@@ -1,0 +1,12 @@
+<h1>Editar item</h1>
+
+<form action="/items/<%= @item.id %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input type="text" name="name" placeholder="Nombre" value="<%= h(@item.name) %>">
+  <input type="text" name="description" placeholder="Descripción (opcional)" value="<%= h(@item.description) %>">
+  <% @item.errors.map(&:message).each do |msg| %>
+    <p class="error"><%= h(msg) %></p>
+  <% end %>
+  <button type="submit">Guardar cambios</button>
+  <a href="/items">Cancelar</a>
+</form>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi CRUD con Sinatra</title>
+  <style>
+    body { font-family: sans-serif; max-width: 560px; margin: 40px auto; padding: 0 16px; }
+    input { display: block; width: 100%; padding: 8px; margin-bottom: 8px; box-sizing: border-box; }
+    button { padding: 8px 14px; cursor: pointer; }
+    .error { color: #b00020; margin-bottom: 8px; }
+    .item { border: 1px solid #ccc; padding: 8px; margin-bottom: 8px;
+            display: flex; justify-content: space-between; align-items: center; }
+    .acciones { display: flex; gap: 8px; align-items: center; }
+    .acciones form { margin: 0; }
+    .vacio { color: #777; }
+    .barra { display: flex; justify-content: space-between; align-items: center;
+             border-bottom: 1px solid #ccc; padding-bottom: 8px; margin-bottom: 16px; }
+    .barra form { margin: 0; }
+  </style>
+</head>
+<body>
+  <% if logged_in? %>
+    <div class="barra">
+      <span>Sesión: <%= h(current_user.email) %></span>
+      <form action="/logout" method="post"><button type="submit">Cerrar sesión</button></form>
+    </div>
+  <% end %>
+  <%= yield %>
+</body>
+</html>

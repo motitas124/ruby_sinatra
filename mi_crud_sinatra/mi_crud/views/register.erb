@@ -1,0 +1,13 @@
+<h1>Crear cuenta</h1>
+
+<form action="/register" method="post">
+  <input type="email" name="email" placeholder="Correo" value="<%= h(@user.email) %>">
+  <input type="password" name="password" placeholder="Contraseña (mínimo 6 caracteres)">
+  <input type="password" name="password_confirmation" placeholder="Repite la contraseña">
+  <% @user.errors.map(&:message).uniq.each do |msg| %>
+    <p class="error"><%= h(msg) %></p>
+  <% end %>
+  <button type="submit">Registrarme</button>
+</form>
+
+<p>¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
